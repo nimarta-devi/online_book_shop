@@ -1,11 +1,16 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+import { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Link, useNavigate} from 'react-router-dom';
+import {Header} from './Header'
+import { useEffect } from 'react';
 
 // link for mysql and node: https://www.youtube.com/watch?v=YYEC7ydDj4k
 const LoginForm = () => {
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate()
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
@@ -14,9 +19,25 @@ const LoginForm = () => {
   const loginBtnFtn = ()=> 
   {
     //if(username === )
-    navigate('/books')
+      alert('Login Successful!');
+      setIsLoggedIn(true);
+      <Header isLoggedIn={true}/>;
+      navigate('/books');
+
   }
+
+  {/*useEffect (()=>{
+    if(isLoggedIn)
+    {
+      <Header isLoggedIn="true"/>
+    }
+    else{
+      <Header isLoggedIn="false"/>
+    }
+  });*/}
+  
   return (
+
     <>
       <div style={{ 
         display: 'flex',  justifyContent:'center', alignItems:'center'
