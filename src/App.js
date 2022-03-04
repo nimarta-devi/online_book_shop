@@ -14,13 +14,17 @@ import {Footer} from './Components/Footer'
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
 import { BookList } from './Components/BookList';
+import {useState} from 'react';
 
 
 function App()
 {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    localStorage.getItem('user') !== null? setIsLoggedIn(true): setIsLoggedIn(false);
+    //console.log("app login: " +{isLoggedIn})
     return(
         <>
-            <Header isLoggedIn={false} />
+            <Header isLoggedIn = {isLoggedIn}/>
             <Navbar/>
             <Routes>
                 <Route path='/' element ={<Home/>}/>

@@ -14,18 +14,25 @@ export const Books = (props) =>{
         setBooks(data)
     }, [])
 
+    const navlinkStyle = ({isActive}) =>{
+        return {
+            fontWeight: isActive ? 'bold': 'normal',
+            fontSize: isActive ? '17px':'',
+            padding: "10px",
+            margin: "10px", 
+            color: "black"
+            //textDecoration: isActive ? 'underline': 'none'
+        }
+    }
 
     return(
         <>
             <div className="list">
                 <br/>
-                <nav className="nav0">
                     <NavLink to=''></NavLink>
-                    <NavLink to='book_list'>Books List</NavLink>
-                    <NavLink to='book_search'>Search Books</NavLink>
-                </nav>
+                    <NavLink to='book_list' style={navlinkStyle}>Books List</NavLink>
+                    <NavLink to='book_search' style={navlinkStyle}>Search Books</NavLink>
                 <Outlet/>
-                {/*<BookList isLoggedIn={isLoggedIn}/>*/}
             </div>
         </>
     )

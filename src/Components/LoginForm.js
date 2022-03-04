@@ -21,6 +21,8 @@ const LoginForm = () => {
   })*/}
 
   const [isLoggedIn, setIsLoggedIn] = useState();
+  const [email, setEmail] = useState("");
+  const [pwd, setPwd] = useState("");
 
   console.log('initial value of isLoggedIn: ' + isLoggedIn);
 
@@ -30,14 +32,31 @@ const LoginForm = () => {
     console.log('Received values of form: ', values);
   };
 
+
+  const HandleEmail= (event) =>{
+      console.log(event.target.value)
+      setEmail(event.target.value)
+  }
+  const HandlePassword= (event) =>{
+    console.log(event.target.value)
+    setPwd(event.target.value)
+}
   const loginBtnFtn = (e)=> 
   {
-    //if(username === )
+    let data = { email: email, pwd: pwd};
+    console.log(data)
+    fetch('http://localhost:8001/login', {
+      method: 'POST',
+      headers: {'Accept': 'application/json', 'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    }).then(function(res){
+      console.log(res.json())
+    });
       alert('Login Successful!');
-      var un = e.target.email;
+      var eml = e.target.email;
       var pw = e.target.password;
-      let user = { email: un, password : pw};
-      localStorage.setItem(JSON.stringify(user))
+      let user = { email: {eml}, password : {pw}};
+      localStorage.setItem('user', JSON.stringify(user))
       setIsLoggedIn(true);
       <Header isLoggedIn={true}/>;
       <Books isLoggedIn={true}/>;
@@ -78,7 +97,13 @@ const LoginForm = () => {
               },
             ]}
           >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} type='text' placeholder="Email" />
+            <Input 
+              onChange = {HandleEmail}
+              prefix={<UserOutlined className="site-form-item-icon" />} 
+              type='text' 
+              placeholder="Email"
+              value={email}  
+            />
           </Form.Item>
           <Form.Item
             name="password"
@@ -90,9 +115,11 @@ const LoginForm = () => {
             ]}
           >
             <Input
+              onChange = {HandlePassword}
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
+              value ={pwd}
             />
           </Form.Item>
           <Form.Item>

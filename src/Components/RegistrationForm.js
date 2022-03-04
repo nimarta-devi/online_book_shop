@@ -1,11 +1,14 @@
 import 'antd/dist/antd.css';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
+import {useState} from 'react'
+
 import {
   Form,
   Input,
   Checkbox,
   Button
 } from 'antd';
+
 
 const formItemLayout = {
   labelCol: {
@@ -41,11 +44,33 @@ const tailFormItemLayout = {
 const RegistrationForm = () => {
   const [form] = Form.useForm();
 
+  const [name, setName]  = useState('');
+  const [email, setEmail]  = useState('');
+  const [pwd, setPwd]  = useState('');
+  const [address, setAddress]  = useState('');
+  const [contact, setContact]  = useState('');
+
+  const navigate = useNavigate();
+
+  const addUser=(e)=>{
+    let data = {name: name, email: email, pwd: pwd, address: address, contact: contact};
+    alert('user added');
+    console.log(data)
+    fetch('http://localhost:8001/api/create', {
+      method: 'POST',
+      headers: {'Accept': 'application/json', 'Content-Type':'application/json'},
+      body: JSON.stringify(data)
+    }).then(function(res){
+      console.log(res.json())
+    });
+    alert ('User Added');
+    navigate('/login')
+    e.preventDefault();
+  }
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
-
-
 
   return (
     <>
@@ -86,7 +111,7 @@ const RegistrationForm = () => {
               },
             ]}
           >
-            <Input />
+            <Input onChange={(e)=>setEmail(e.target.value)}/>
           </Form.Item>
 
           <Form.Item
@@ -100,31 +125,7 @@ const RegistrationForm = () => {
             ]}
             hasFeedback
           >
-            <Input.Password />
-          </Form.Item>
-
-          <Form.Item
-            name="confirm"
-            label="Confirm Password"
-            dependencies={['password']}
-            hasFeedback
-            rules={[
-              {
-                required: true,
-                message: 'Please confirm your password!',
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue('password') === value) {
-                    return Promise.resolve();
-                  }
-
-                  return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                },
-              }),
-            ]}
-          >
-            <Input.Password />
+            <Input.Password onChange={(e)=>setPwd(e.target.value)}/>
           </Form.Item>
 
           <Form.Item
@@ -139,7 +140,7 @@ const RegistrationForm = () => {
               },
             ]}
           >
-            <Input />
+            <Input onChange={(e)=>{setName(e.target.value)}}/>
           </Form.Item>
 
           <Form.Item
@@ -153,6 +154,7 @@ const RegistrationForm = () => {
             ]}
           >
              <Input
+              onChange={(e)=>setAddress(e.target.value)}
               style={{
                 width: '100%',
               }}
@@ -170,6 +172,7 @@ const RegistrationForm = () => {
             ]}
           >
             <Input
+              onChange={(e)=>setContact(e.target.value)}
               style={{
                 width: '100%',
               }}
@@ -193,7 +196,7 @@ const RegistrationForm = () => {
             </Checkbox>
           </Form.Item>
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" onClick={addUser}>
               Register
             </Button>
           </Form.Item>

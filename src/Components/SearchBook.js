@@ -9,10 +9,16 @@ export const SearchBook =(props)=>{
     const { Search } = Input;
     const { Meta } = Card;
 
-    const [book, setBook] = useState();
-    const onSearchFtn = (e)=>{
+    const [book, setBook] = useState({
+        title : "",
+        author: "",
+        price: ""
+    });
+
+    const [title, setTitle] = useState('')
+    const onSearchFtn = ()=>{
         data.forEach(i=>{
-            if(i.title === e.target.value)
+            if(i.title == title)
             {
                 setBook(i);
             }
@@ -33,20 +39,29 @@ export const SearchBook =(props)=>{
         <>
             <div className="search_div">
                 <br/>
-                <Space style={{float: 'center'}} direction="vertical">
-                    <Search placeholder="input search tilte" style={{ width: 200 }} onSearch={onSearchFtn}/>
-                </Space>
-                </div>
-                <br/>
-            <div className="container-fluid mt-5">
+                {/*<Space style={{float: 'center'}} direction="vertical">
+                    <Search placeholder="input search tilte" style={{ width: 400 }} onSearch={onSearchFtn}/>
+                </Space>*/}
+                <input 
+                placeholder="search by book tilte" value={title} 
+                onChange={(e)=>{setTitle(e.target.value)}}
+                style={{ width: 400 }}/>
+                <Button type="primary" onClick={onSearchFtn}>Search</Button>
+            </div>
+            
+            <br/>
+            
+            <div className="container-fluid mt-5" style={{float: 'center', paddingLeft: 200}}>
                 <div className = "row text-center">
                     <div className="col-4 text-center" style={{padding: '3px', margin: '5px',border: '3px solid black', display: 'inline-block'}}>
                         <Card
                             hoverable
-                            style={{ width: 275 }}
+                            style={{ width: 400 }}
                             cover={<img alt="image" src="https://thumbs.dreamstime.com/b/blank-soft-color-book-standing-red-vertical-cover-black-background-isolated-clipping-path-around-d-illustration-187008688.jpg" />}
                         >
-                            <Meta title={book.title} description={book.author} />
+                            <Meta title={book.title} description={book.author}  />
+                            <p>Published In: {book.year}</p> 
+                            <p>Language: {book.language} </p>
                             <br/>
                             <Button 
                                 type="primary" 
@@ -61,8 +76,6 @@ export const SearchBook =(props)=>{
                     </div>
                 </div>
             </div>
-        </>
-        
-            
+        </> 
     )
 }

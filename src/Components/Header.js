@@ -5,7 +5,8 @@ import { useEffect, useState } from "react";
 export const Header = (props) =>{
 
     const isLoggedIn = props.isLoggedIn;
-    console.log('header prop: ' + isLoggedIn)
+    //const isLoggedIn = {localStorage.getItem('user')=== }
+    console.log('header prop: ' + props.isLoggedIn)
 
     return(
         <div>
