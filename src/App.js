@@ -9,27 +9,33 @@ import { OrderConfirmed } from './Components/OrderConfirmed';
 import { NotFound } from './Components/NotFound';
 import { Header } from './Components/Header';
 import { Contact } from './Components/Contact';
+import { SearchBook } from './Components/SearchBook';
 import {Footer} from './Components/Footer'
 import './App.css';
 import {Route, Routes} from 'react-router-dom';
+import { BookList } from './Components/BookList';
 
 
 function App()
 {
     return(
         <>
-            <Header/>
+            <Header isLoggedIn={false} />
             <Navbar/>
             <Routes>
                 <Route path='/' element ={<Home/>}/>
-                <Route path='home' element ={<Home/>}/>
-                <Route path='login' element ={<LoginForm/>}/>
-                <Route path='register' element ={<RegistrationForm/>}/>
-                <Route path='about' element ={<About/>}/>
-                <Route path='books' element ={<Books/>}/>
-                <Route path='order_confirm' element = {<OrderConfirmed/>}/>
-                <Route path='agreement' element = {<Agreement/>}/>
-                <Route path='contact' element = {<Contact/>}/>
+                <Route path='/home' element ={<Home/>}/>
+                <Route path='/login' element ={<LoginForm/>}/>
+                <Route path='/register' element ={<RegistrationForm/>}/>
+                <Route path='/about' element ={<About/>}/>
+                <Route path='/books' element ={<Books/>}> 
+                    <Route path ='' element={<BookList/>}/>
+                    <Route path ='book_list' element={<BookList/>}/>
+                    <Route path = 'book_search' element={<SearchBook/>}/>
+                </Route>
+                <Route path='/order_confirm' element = {<OrderConfirmed/>}/>
+                <Route path='/agreement' element = {<Agreement/>}/>
+                <Route path='/contact' element = {<Contact/>}/>
                 <Route path='*' element = {<NotFound/>}/>
             </Routes>
             <Footer/>

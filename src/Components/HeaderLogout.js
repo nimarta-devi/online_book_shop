@@ -14,16 +14,13 @@ export const HeaderLogout = () =>{
     }
 
     return (
-        <div>
-            <div style={{display:'inline-block', float: 'right'}}>
-                <nav className = "nav0">
-                    <NavLink to ='login' style={navbarStyle}>
-                        <UserOutlined />
-                        Logout  
-                    </NavLink>
-                    
-                </nav>
-            </div>
-        </div>    
+        <div style={{display:'inline-block', float: 'right'}}>
+            <nav className = "nav0">
+                <NavLink to ='login' style={navbarStyle}>
+                <UserOutlined />
+                Logout  
+                </NavLink>        
+            </nav>
+        </div>  
     )
 }

@@ -2,37 +2,30 @@ import {useState, useEffect} from 'react';
 import { Input, Space } from 'antd';
 import data from './data/data.json'
 import { BookList } from './BookList';
+import { NavLink, Outlet } from 'react-router-dom';
 
-const { Search } = Input;
 
-export const Books = () =>{
-
+export const Books = (props) =>{
+    const isLoggedIn = props.isLoggedIn;
     const [books, setBooks] = useState([])
+    console.log('books prop : ' + isLoggedIn)
 
     useEffect(()=>{
         setBooks(data)
-        console.log(data)
     }, [])
 
-    const onSearchFtn = (value)=>{
-        data.forEach(i=>{
-            if(i.title === value)
-            {
-                
-            }
-         })
-    }
+
     return(
         <>
-            <div>
-                <br/>
-                <Space style={{float: 'center'}} direction="vertical">
-                    <Search placeholder="input search tilte" style={{ width: 200 }} onSearch={onSearchFtn}/>
-                </Space>
-            </div>
-            <br/>
             <div className="list">
-                <BookList/>
+                <br/>
+                <nav className="nav0">
+                    <NavLink to=''></NavLink>
+                    <NavLink to='book_list'>Books List</NavLink>
+                    <NavLink to='book_search'>Search Books</NavLink>
+                </nav>
+                <Outlet/>
+                {/*<BookList isLoggedIn={isLoggedIn}/>*/}
             </div>
         </>
     )

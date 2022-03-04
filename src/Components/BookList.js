@@ -3,7 +3,7 @@ import data from './data/data.json'
 import { Card, Button } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-export const BookList = () =>{
+export const BookList = (props) =>{
 
     const [books, setBooks] = useState([])
 
@@ -11,12 +11,18 @@ export const BookList = () =>{
 
     const navigate = useNavigate();
     const buyBookFtn = ()=>{
-        navigate('/order_confirm')
+        if(props.isLoggedIn)
+        {
+            navigate('/order_confirm')
+        }
+        else{
+            alert('You must login first!')
+            navigate('/login')
+        }
     }
 
     useEffect(()=>{
         setBooks(data)
-        console.log(data)
     }, [])
 
     return (

@@ -4,40 +4,48 @@ import { useState } from 'react';
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {Link, useNavigate} from 'react-router-dom';
-import {Header} from './Header'
-import { useEffect } from 'react';
+import {Header} from './Header';
+import {Books} from './Books';
+import Password from 'antd/lib/input/Password';
 
 // link for mysql and node: https://www.youtube.com/watch?v=YYEC7ydDj4k
 const LoginForm = () => {
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+ {/* const express = require('express')
+  const mysql = require('mysql')
+
+  const db = mysql.createConnection({
+    host: 'localhost',
+    user : 'root',
+    password: ''
+  })*/}
+
+  const [isLoggedIn, setIsLoggedIn] = useState();
+
+  console.log('initial value of isLoggedIn: ' + isLoggedIn);
+
   const navigate = useNavigate()
+
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
   };
 
-  const loginBtnFtn = ()=> 
+  const loginBtnFtn = (e)=> 
   {
     //if(username === )
       alert('Login Successful!');
+      var un = e.target.email;
+      var pw = e.target.password;
+      let user = { email: un, password : pw};
+      localStorage.setItem(JSON.stringify(user))
       setIsLoggedIn(true);
       <Header isLoggedIn={true}/>;
+      <Books isLoggedIn={true}/>;
       navigate('/books');
-
   }
 
-  {/*useEffect (()=>{
-    if(isLoggedIn)
-    {
-      <Header isLoggedIn="true"/>
-    }
-    else{
-      <Header isLoggedIn="false"/>
-    }
-  });*/}
   
   return (
-
     <>
       <div style={{ 
         display: 'flex',  justifyContent:'center', alignItems:'center'
@@ -54,7 +62,7 @@ const LoginForm = () => {
       }}>
         <Form
           layout="vertical"
-          name="normal_login"
+          name="login_form"
           className="login-form"
           initialValues={{
             remember: true,
@@ -62,15 +70,15 @@ const LoginForm = () => {
           onFinish={onFinish}
         >
           <Form.Item
-            name="username"
+            name="email"
             rules={[
               {
                 required: true,
-                message: 'Please input your Username!',
+                message: 'Please input your Eamil!',
               },
             ]}
           >
-            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+            <Input prefix={<UserOutlined className="site-form-item-icon" />} type='text' placeholder="Email" />
           </Form.Item>
           <Form.Item
             name="password"
@@ -109,6 +117,6 @@ const LoginForm = () => {
       </div>
     </>
   );
-};
+}
 
 export default LoginForm;
