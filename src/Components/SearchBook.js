@@ -15,6 +15,8 @@ export const SearchBook =(props)=>{
         price: ""
     });
 
+    const [login, setLogin] = useState(false);
+
     const [title, setTitle] = useState('')
     const onSearchFtn = ()=>{
         data.forEach(i=>{
@@ -26,7 +28,7 @@ export const SearchBook =(props)=>{
     }
     const navigate = useNavigate();
     const buyBookFtn = ()=>{
-        if(props.isLoggedIn)
+        if(login)
         {
             navigate('/order_confirm')
         }
@@ -35,6 +37,14 @@ export const SearchBook =(props)=>{
             navigate('/login')
         }
     }
+
+    useEffect(()=>{
+        console.log(props);
+        if(localStorage.getItem('user') !== null){
+            setLogin(true);
+        }
+    }, [])
+
     return(
         <>
             <div className="search_div">

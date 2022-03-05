@@ -53,8 +53,7 @@ const RegistrationForm = () => {
   const navigate = useNavigate();
 
   const addUser=(e)=>{
-    let data = {name: name, email: email, pwd: pwd, address: address, contact: contact};
-    alert('user added');
+    let data = {name: name, email: email, password: pwd, address: address, contact: contact};
     console.log(data)
     fetch('http://localhost:8001/api/create', {
       method: 'POST',

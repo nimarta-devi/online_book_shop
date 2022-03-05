@@ -19,13 +19,13 @@ db.connect((err)=>{
     if(err){throw err;}
     console.log('MySQL Connected')
     db.query('SELECT * FROM users'), function(err, res, fields){
-        if(err) throw err
+        if(err) {throw err;}
         console.log(res)
     }
 })
 
 
-app.post("api/create", (req, res)=>{
+app.post("/api/create", (req, res)=>{
     const fullname  = req.body.fullname;
     const email  = req.body.email;
     const password  = req.body.password;
@@ -61,5 +61,5 @@ app.post('/login', (req, res)=>{
     }
 })
 app.listen(8001, ()=>{
-    console.log('running server')
+    console.log('running server at port 8001')
 })

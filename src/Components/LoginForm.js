@@ -53,14 +53,18 @@ const LoginForm = () => {
       console.log(res.json())
     });
       alert('Login Successful!');
-      var eml = e.target.email;
-      var pw = e.target.password;
+      var eml = email;
+      var pw = pwd;
       let user = { email: {eml}, password : {pw}};
-      localStorage.setItem('user', JSON.stringify(user))
-      setIsLoggedIn(true);
-      <Header isLoggedIn={true}/>;
-      <Books isLoggedIn={true}/>;
-      navigate('/books');
+      localStorage.setItem('user', JSON.stringify(user));
+      if(localStorage.getItem('user') !== null){
+        setIsLoggedIn(true);
+        
+        <Header true/>;
+        <Books true/>;
+        navigate('/books');
+      }
+      
   }
 
   

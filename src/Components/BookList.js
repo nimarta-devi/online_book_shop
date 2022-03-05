@@ -5,13 +5,14 @@ import { useNavigate } from 'react-router-dom';
 
 export const BookList = (props) =>{
 
+    const [login, setLogin] = useState(false);
     const [books, setBooks] = useState([])
 
     const { Meta } = Card;
 
     const navigate = useNavigate();
     const buyBookFtn = ()=>{
-        if(props.isLoggedIn)
+        if(login)
         {
             navigate('/order_confirm')
         }
@@ -22,7 +23,11 @@ export const BookList = (props) =>{
     }
 
     useEffect(()=>{
-        setBooks(data)
+        setBooks(data);
+        console.log(props);
+        if(localStorage.getItem('user') !== null){
+            setLogin(true);
+        }
     }, [])
 
     return (

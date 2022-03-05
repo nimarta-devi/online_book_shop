@@ -15,12 +15,19 @@ import './App.css';
 import {Route, Routes} from 'react-router-dom';
 import { BookList } from './Components/BookList';
 import {useState} from 'react';
+import { useEffect } from 'react';
 
 
 function App()
 {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    localStorage.getItem('user') !== null? setIsLoggedIn(true): setIsLoggedIn(false);
+
+    useEffect(() => {
+        // Update the document title using the browser API
+       localStorage.getItem('user') !== null? setIsLoggedIn(true): setIsLoggedIn(false);
+    });
+
+    //
     //console.log("app login: " +{isLoggedIn})
     return(
         <>
