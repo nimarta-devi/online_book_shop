@@ -10,6 +10,7 @@ This application has been developed by using "React js" and "Node js" gives the 
 2: express
 3: antd
 4: react router
+5: MySQL Server
 
 # How to run:
 1: clone the repository into your PC.
